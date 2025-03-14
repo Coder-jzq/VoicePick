@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoicePick</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-blue-50">
+    <div class="bg-white shadow-lg rounded-xl p-6 w-96 text-center">
+        <h1 class="text-xl font-bold text-gray-800 mb-4">VoicePick</h1>
+
+        <audio id="audio" class="w-full my-3" controls></audio>
+
+        <button id="showTextBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+            Show Text
+        </button>
+        <p id="text" class="hidden text-gray-700 font-semibold mt-2"></p>
+
+        <div class="mt-4 flex justify-center">
+            <button id="randomBtn" class="bg-green-500 text-white px-4 py-2 rounded-md">New Question</button>
+        </div>
+    </div>
+
+    <script>
+        // 音频文件列表
+        const files = [
+            "Can you introduce your family to us.mp3",
+            "Could you tell us something about your hometown.mp3",
+            "Please introduce your undergraduate school life .mp3",
+            "Why did you take the postgraduate entrance examination.mp3",
+            "Why do you want to study in our school .mp3",
+            "your shortcomings.mp3",
+            "your advantages.mp3",
+            "What kind of personality do you think you have .mp3",
+            "What kind of books do you enjoy reading.mp3",
+            "What is the deepest thing in your memory.mp3",
+            "What is your favorite subject .mp3",
+            "Why do you choose this major.mp3",
+            "What will you do if you failed this time.mp3",
+            "What would like to do five years after graduation .mp3",
+            "What do you think are the necessary qualities that one should have.mp3",
+            "Have you taken any exams related to your major.mp3",
+            "What do you like and dislike about your school life.mp3",
+            "Can you tell us something about your graduation paper thesis dissertation .mp3",
+            "What kind of teachers do you think are qualified to be supervisors .mp3",
+            "Can you tell us something about your graduation paper.mp3",
+            "If only one option is given to you, do you want to choose the life direction of specialization or divergence.mp3",
+            "Which discipline do you think has promoted social progress .mp3",
+            "What did you do during the holiday.mp3",
+            "What do you think of chatgpt.mp3",
+            "What is your favorite city？.mp3",
+            "What abilities graduate students need to possess.mp3",
+            "Have you participated in any activities or clubs in the university, and what have you obtained.mp3",
+            "Talk about the traditional culture of your hometown.mp3",
+            "What to do if the project encounters difficulties .mp3",
+            "What is your biggest fear.mp3",
+            "Why not choose your undergraduate school.mp3",
+            "What do you think should be paid attention to in teamwork .mp3",
+            "Which do you think is better, qq or WeChat.mp3",
+            "How will you face the challenge.mp3",
+            "What is your favorite computer game.mp3",
+            "What kind of job do you like Tell me three reasons.mp3",
+            "What are the customs and activities during the Spring Festival.mp3",
+            "You can share the difficulties you encountered once and how to solve them.mp3",
+            "What do you regret most.mp3"
+        ];
+
+        // 加载随机音频
+        function loadRandomAudio() {
+            if (files.length === 0) return;
+
+            // 随机选择一个文件
+            const randomFile = files[Math.floor(Math.random() * files.length)];
+
+            // 设置音频路径（假设音频文件在 "audio/" 文件夹中）
+            document.getElementById("audio").src = `audio/${randomFile}`;
+
+            // 显示文件名（文本）
+            document.getElementById("text").innerText =  randomFile.replace(/\.mp3$/, "") + "?";
+            document.getElementById("text").classList.add("hidden");
+
+            // 重置按钮文字
+            document.getElementById("showTextBtn").innerText = "Show Text";
+        }
+
+        // 显示/隐藏文本
+        document.getElementById("showTextBtn").addEventListener("click", () => {
+            const textElem = document.getElementById("text");
+            if (textElem.classList.contains("hidden")) {
+                textElem.classList.remove("hidden");
+                document.getElementById("showTextBtn").innerText = "Hide Text";
+            } else {
+                textElem.classList.add("hidden");
+                document.getElementById("showTextBtn").innerText = "Show Text";
+            }
+        });
+
+        // 点击“New Question”加载新问题
+        document.getElementById("randomBtn").addEventListener("click", loadRandomAudio);
+
+        // 页面加载完成后自动播放一个随机音频
+        window.onload = loadRandomAudio;
+    </script>
+</body>
+</html>
